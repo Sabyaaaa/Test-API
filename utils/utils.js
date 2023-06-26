@@ -2,10 +2,11 @@
 const {
     ContractCreateTransaction,
     FileAppendTransaction,
-    FileCreateTransaction
+    FileCreateTransaction,
+    ContractExecuteTransaction
 } = require("@hashgraph/sdk");
 
-const Web3 = require('web3');
+const web3 = require('web3')
 
 // Function to generate bytecode File Id
 async function createByteCodeFileId(bytecode,client,operatorKey) {
@@ -67,4 +68,23 @@ async function createContractFactoryContractId(bytecodeFileId,gasLimit,client) {
     return [contractID, contractAddress];
 }
 
-module.exports={createByteCodeFileId,createContractFactoryContractId,}
+async function createChildContractInstance(cId, gasLim, fcnName,client) {
+        const contractExecuteTx = new ContractExecuteTransaction()
+        .setContractId(cId)
+        .setGas(gasLim)
+        .setFunction(fcnName)
+    const contractExecuteSubmit = await contractExecuteTx.execute(client);
+    //const contractExecuteRec = await contractExecuteSubmit.getRecord(client);// This will return all data->including logs,txnId,Timestamp etc
+    const getReceipt=await contractExecuteSubmit.getReceipt(client);
+    // const receiptStatus = getReceipt.status;
+    // const contractID = getReceipt.contractId;
+
+    // // Retreive the contract Id
+    // const contractAddress = contractID.toSolidityAddress();
+
+    // return [contractID, contractAddress, receiptStatus];
+    return getReceipt.status;
+
+} 
+
+module.exports={createByteCodeFileId,createContractFactoryContractId, createChildContractInstance}
