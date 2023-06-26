@@ -2,7 +2,7 @@
 pragma solidity ^0.8.0;
 import "./EscrowDemo.sol";
 
-contract FactoryContact {
+contract Factory {
     event ContractCreated(address newContract, uint256 timestamp);
 
     EscrowDemo[] public deployedContracts;
