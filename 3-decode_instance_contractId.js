@@ -7,7 +7,7 @@ const {
 } = require("@hashgraph/sdk");
 
 // Import required functions from mirror_node folder
-const utils = require('./mirror_node/utils/utils.js')
+const utils = require('./utils/mirror_utils.js')
 
 // Generate Bytecode
 let contractFactoryCompiled = require("./build/contracts/Factory.json");

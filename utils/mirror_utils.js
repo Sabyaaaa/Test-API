@@ -1,16 +1,18 @@
 // Import web3 and axios
-
 const web3 = require('web3')
-// const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
 const axios = require('axios');
 
 
 // function to get logs data of events from api url, for smart contract
 
 async function getLogsTxnDetails(apiUrl) {
+
     const promise = axios.get(apiUrl)
+
     const dataPromise = promise.then((response) => response.data)
+
     return dataPromise
+
 }
 
 // function to decode the log data coming from api url of smart contract
