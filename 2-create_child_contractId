@@ -7,7 +7,6 @@ const {
     Client
 } = require("@hashgraph/sdk");
 
-
 const utils = require("./utils/utils.js");
 
 // Configure accounts and Id (Testnet credentials)
@@ -19,12 +18,11 @@ const client = Client.forTestnet().setOperator(operatorId, operatorPrivateKey);
 const contractId=process.env.FACTORY_CONTRACT_ID;
 
 async function main() {
-  
+
         const gasLimit = 10000000;
         const receiptStatus = await utils.createChildContractInstance(contractId, gasLimit, "createContract", client);
         console.log(`\n Instance creation status: ${receiptStatus}`);
        
-
 }
 main();
 

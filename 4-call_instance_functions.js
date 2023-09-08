@@ -26,15 +26,13 @@ async function main() {
     console.log('contractID', contractId);
 
     console.log(`\n ******* Calling function to add person information ******* `);
-
-    // Trying with different approach
-
+      
     const contractExecuteTx = new ContractExecuteTransaction()
         .setContractId(contractId)
         .setGas(10000000)
         .setFunction(
             "add",
-            new ContractFunctionParameters().addUint256(1).addString('sabya').addUint256(22)
+            new ContractFunctionParameters().addUint256(2).addString('ayushi').addUint256(23)
         );
     const contractExecuteSubmit = await contractExecuteTx.execute(client);
     const contractExecuteRx = await contractExecuteSubmit.getReceipt(client);
@@ -43,6 +41,7 @@ async function main() {
 
 
 }
+  
 main();
 
 
